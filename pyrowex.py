@@ -8,7 +8,7 @@ Created on Sat Mar 25 21:23:45 2023
 
 """ 
 
-pyrowex: the Python Recorder of Wildfire Exceptional Events
+pyrowex: Python Retrieval of Wildfire Exceptional Events
 
 Notes:
 Design to be Standard agnostic: 
@@ -45,43 +45,63 @@ filelist.sort()
 
 i = 0
 for file in filelist:
-    dftemp = pd.read_csv("Data for SCAQMD Project/"+file)
-    mask = (dftemp['Local Site Name'] == site) & (dftemp['Sample Duration'] == '24-HR BLK AVG')
+    pm25temp = pd.read_csv("Data for SCAQMD Project/"+file,parse_dates=["Date Local"])
+    mask = (pm25temp['Local Site Name'] == site) & (pm25temp['Sample Duration'] == '24-HR BLK AVG')
 
     i += 1
     if i == 1:
-        dfsite = dftemp[mask]
+        pm25site = pm25temp[mask]
 
     else:
-        dfsite = pd.concat((dfsite,dftemp[mask]),
+        pm25site = pd.concat((pm25site,pm25temp[mask]),
                            ignore_index=True)
         
-rolling_ave = dfsite["Arithmetic Mean"].rolling(30,min_periods=1,closed='both').mean()
-rolling_pct = dfsite["Arithmetic Mean"].rolling(30,min_periods=1,closed='both').quantile(.98)
-rolling_std = dfsite["Arithmetic Mean"].rolling(30,min_periods=1,closed='both').std()
-rolling_exp = dfsite["Arithmetic Mean"].ewm(halflife=30).std()
+rolling_ave = pm25site["Arithmetic Mean"].rolling(90,min_periods=1,closed='both').mean()
+rolling_pct = pm25site["Arithmetic Mean"].rolling(90,min_periods=1,closed='both').quantile(.98)
+rolling_std = pm25site["Arithmetic Mean"].rolling(90,min_periods=1,closed='both').std()
+std = pm25site["Arithmetic Mean"].std()
 
+rolling_exp = pm25site["Arithmetic Mean"].ewm(halflife=5).std()
+
+compare_years = 5
+rolling_ave_years = rolling_ave.groupby(pm25site['Date Local'].dt.dayofyear).nth(range(0,compare_years))
+rolling_ave_years = rolling_ave_years.groupby(np.arange(len(rolling_ave_years))//compare_years).mean()
 
 
 threshold = 35.7
-exceedances = dfsite.loc[dfsite["Arithmetic Mean"]>threshold]["Arithmetic Mean"]
+exceedances = pm25site.loc[pm25site["Arithmetic Mean"]>threshold]["Arithmetic Mean"]
+exceedances_dates = pm25site.loc[pm25site["Arithmetic Mean"]>threshold]["Date Local"]
+
 
 
 # plot time range
 
 start_date = '2011-01-01'
-end_date = '2014-01-01'
-start_loc = dfsite.loc[dfsite['Date Local'] == start_date].index[0]
-end_loc = dfsite.loc[dfsite['Date Local'] == end_date].index[0]
+end_date = '2016-01-01'
+start_loc = pm25site.loc[pm25site['Date Local'] == start_date].index[0]
+end_loc = pm25site.loc[pm25site['Date Local'] == end_date].index[0]
 
-plt.plot(rolling_ave[start_loc:end_loc],color='red')
-time = range(0,len(rolling_ave))
+fig, timeseries = plt.subplots()
+
+dates = pd.to_datetime(pm25site['Date Local'][start_loc:end_loc])
+
+timeseries.plot(dates,rolling_ave[start_loc:end_loc],color='red')
+time = pd.to_datetime(pm25site['Date Local'][start_loc:end_loc])
 # 2.06 standard deviations is the 98% percentile for a normal curve
-plt.fill_between(time[start_loc:end_loc], rolling_ave[start_loc:end_loc],
-                 rolling_ave[start_loc:end_loc]+2.06*rolling_std[start_loc:end_loc],
+timeseries.fill_between(dates, rolling_ave[start_loc:end_loc],
+                 rolling_ave[start_loc:end_loc]+2.06*std,
                  alpha=0.2,color='red')
 mask_x = np.logical_and(exceedances.index>start_loc,exceedances.index<end_loc)
-plt.scatter(exceedances.index[mask_x],exceedances[mask_x])
-# plt.scatter(dfsite)
+
+timeseries.scatter(exceedances_dates[mask_x],exceedances[mask_x])
+
+timeseries.set_ylabel("$PM_{2.5} \:[\mu g \: m^{-3}$]")
+timeseries.set_xlabel("Time index")
+# timeseries.set_title(site+" outlier threshold rolling average + 5.1 $\mu g \: m^{-3}$ ")
+timeseries.set_title(site+" outlier threshold rolling average + 2.06 * std ")
+plt.savefig("OutlierThreshStd.pdf")
+# plt.savefig("OutlierThresh5.pdf")
+
+# plt.scatter(pm25site)
 
 
