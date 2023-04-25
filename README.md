@@ -9,10 +9,14 @@
 
 
 
-Automated Identification of Exceptional Air Pollution Events Caused by Wildfires
+## Automated Identification of Exceptional Air Pollution Events Caused by Wildfires
+
 Course Project for ENE 428 – Air Pollution Fundamentals at University of Southern California
+
 taught by Professor Jiachen Zhang
+
 Sponsored by the South Coast Air Quality Management District (SCAQMD)
+
 Obin Sturm, Jessica Deng, Nina Zanghi 
 
 
