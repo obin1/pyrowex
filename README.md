@@ -95,7 +95,7 @@ Further analysis shows that 1239 of these 1243 cases were a distinctive level bu
 
 Alternatively, it could be that the radius for a trajectory passing near a point of 0.2 degrees (approximately 20 km) is too narrow. This was chosen from Appendix A3 of the EPA guidance on wildfire exceptional events for ozone, which discusses coarse meteorological grid resolution to HYSPLIT (around 40 km) as a source of uncertainty. We chose 20 km in either direction, half the length of such a grid cell, as the threshold under which a trajectory is close enough to a fire.  As a preliminary assessment of the sensitivity of the results to this parameter, we increased this to 1 degree (approximately 100 km) and found an increase to only 11% of cases as being caused by a wildfire.
 
-A more likely cause of uncertainty is the sparsity of back trajectory data, which was only done at 1 time in the date of interest. In reality, more trajectories could have transported smoke to the monitor.  Future analysis could generate back trajectories every 3 hours on the dates of interest similarly to Enayati Ahangar (2021), which could be provided to pyrowex and potentially give a more realistic and filled in assessment of upstream wildfire sources.
+A more likely cause of uncertainty is the sparsity of back trajectory data, which was only done at 1 time on the date of interest. In reality, more trajectories could have transported smoke to the monitor.  Future analysis could generate back trajectories every 3 hours on the dates of interest similarly to Enayati Ahangar (2021), which could be provided to pyrowex and potentially give a more realistic and filled in assessment of upstream wildfire sources.
 
 ## 5 Conclusions
 
