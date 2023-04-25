@@ -17,7 +17,7 @@ taught by Professor Jiachen Zhang
 
 Sponsored by the South Coast Air Quality Management District (SCAQMD)
 
-Obin Sturm, Jessica Deng, Nina Zanghi 
+Jessica Deng, Obin Sturm, and Nina Zanghi 
 
 
 
