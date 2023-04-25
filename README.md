@@ -65,16 +65,19 @@ Given all the required input data, pyrowex processes all 1380 cases in an automa
 
 The Station Fire occurred in the last week of August 2009 and burned nearly a quarter of the land mass of the Los Angeles National Forest (Thompson et al., 2009). This fire occurred in the absence of large winds, but quite close to populated regions of the South Coast Air Basin, including Azusa and Glendora, shown in Figure 3. 
 
-
+<img width="519" alt="Azusa_WFEIS_1" src="https://user-images.githubusercontent.com/54367380/234381108-2af41c73-a05b-4df6-ba31-ac6108691ad1.png">
+<img width="618" alt="Azusa_WFEIS_2" src="https://user-images.githubusercontent.com/54367380/234381111-4daa49aa-60f2-4522-87fe-ed9110f0b3dd.png">
 Figure 3. Location of the station fire as mapped by the WFEIS emissions tool (French et al., 2014) used as input to the pyrowex tool.
 
 The pyrowex tool identifies a measurement of the Azusa station (as well as other stations, including Glendora) exceedance during this time as being caused by wildfire emissions. The Azusa site recorded a PM2.5 measurement of 72 ug per cubic meter on August 26, 2009, which is visually distinguishable from the rolling average in Figure 4,  and second to last event in the displayed time range.
 
+![AzusaOutlierThreshStd](https://user-images.githubusercontent.com/54367380/234381154-1e28c965-bd1b-446f-a066-586a73ef4076.jpg)
 Figure 4. The Azusa site reached a distinctive level of 72 ug per cubic meter during the Station Fire.
 
 
 In this case study, pyrowex also matches the location of the fire to several points of the back trajectory generated for this exceedance. As the fire had such high proximity to the Azusa monitoring site, the Q/D ratio is high, calculated as 90.6 Mg of PM2.5 primary emissions per kilometer.
 
+<img width="625" alt="Backtraject" src="https://user-images.githubusercontent.com/54367380/234381444-5b8b8b3f-00d5-4ec7-a319-e9d1da062e49.png">
 Figure 5. Output from SplitR – two 40 hour back trajectories from Azusa on August 26, 2009.
 
 
@@ -97,12 +100,18 @@ Author Contributions
 JD led the trajectory analyses using SplitR, which produced csv files used as input to the pyrowex tool (Iannone, 2016).  NZ led the emissions analysis and generated preliminary fire maps using the Wildland Fire Emissions Information System (French et al., 2014), also provided as input. OS developed the pyrowex tool with both sources as input. All authors contributed to the analysis, presentation, and writing of the document.
 References
 Enayati Ahangar, F., Pakbin, P., Hasheminassab, S., Epstein, S. A., Li, X., Polidori, A., & Low, J. (2021). Long-term trends of PM2.5 and its carbon content in the South Coast Air Basin: A focus on the impact of wildfires. Atmospheric Environment, 255, 118431. https://doi.org/10.1016/j.atmosenv.2021.118431
+
 French, N.H.F., D. McKenzie, T. Erickson, B. Koziol, M. Billmire, K.A. Endsley, N.K.Y. Scheinerman, L. Jenkins, M.E. Miller, R. Ottmar, and S. Prichard (2014). "Modeling regional-scale fire emissions with the Wildland Fire Emissions Information System." Earth Interactions 18, no. 16 
+
 Ianonne, Richard. (2016). splitr [Source Code]. https://github.com/rich-iannone/splitr
+
 Pope III, C.A., Dockery, D.W., 2006. Health effects of fine particulate air pollution: lines that connect. Journal of the Air Waste Management Association. 56, 709–742.
 South Coast Air Quality Management District, 2015. Multiple Air Toxics Exposure Study in the South Coast Air Basin (MATES IV).
+
 Stein, A.F., Draxler, R.R, Rolph, G.D., Stunder, B.J.B., Cohen, M.D., and Ngan, F., (2015). NOAA’s HYSPLIT atmospheric transport and dispersion modeling system, Bull. Amer. Meteor. Soc., 96, 2059-2077, http://dx.doi.org/10.1175/BAMS-D-14-00110.1
+
 Thompson, R., Kaplan, C., & Gomberg, D. (2009). The Station Fire: An Example of a Large Wildfire in the Absence of Significant Winds. National Weather Service Forecast Office.
+
 US EPA (2016). Guidance on the Preparation of Exceptional Events Demonstrations for Wildfire Events that May Influence Ozone Concentrations https://www.epa.gov/sites/default/files/2019-08/documents/ee_prescribed_fire_final_guidance_-_august_2019.pdf 
 
 
