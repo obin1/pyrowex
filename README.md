@@ -10,38 +10,15 @@
 
 
 Automated Identification of Exceptional Air Pollution Events Caused by Wildfires
-Jessica Deng, Obin Sturm, Nina Zanghi
-ENE 428 – Course Project
-Word Count: 2446 Words
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Course Project for ENE 428 – Air Pollution Fundamentals at University of Southern California
+Obin Sturm, Jessica Deng, Nina Zanghi 
 
 
 
 
 1 Introduction
 
-Over 17 million people live in the South Coast Air Basin, which is managed by the South Coast Air Quality Management District (SCAQMD).  This air basin suffers from some of the worst air quality in the US, including the highest ozone levels (South Coast Air Quality Management District, 2015).  Another pollutant of concern is fine particulate matter (PM2.5) which exposure to can result in cardiovascular and respiratory morbidity, and potentially mortality (Pope III and Dockey, 2006). Though air quality has improved over the last few decades, the South Coast Air Basin still has high PM2.5 levels and is designated as a serious nonattainment area for the federal 24 hour PM2.5 standard .
+Over 17 million people live in the South Coast Air Basin, which is managed by the South Coast Air Quality Management District (SCAQMD).  This air basin suffers from some of the worst air quality in the US, including the highest ozone levels (South Coast Air Quality Management District, 2015).  Another pollutant of concern is fine particulate matter (PM2.5) which exposure to can result in cardiovascular and respiratory morbidity, and potentially mortality (Pope III and Dockey, 2006). Though air quality has improved over the last few decades, the South Coast Air Basin still has high PM2.5 levels and is designated as a serious nonattainment area for the federal 24 hour PM2.5 standard.
 
 It is of regulatory interest to identify air pollution events that are out of SCAQMD’s control. These air quality events have to meet the EPA’s criteria if they are to be considered “exceptional events” (US EPA, 2016). The label of exceptional events removes those events from the overall air quality calculations. Any exceptional event must fulfill three criteria: the emissions from the event caused the monitored exceedance, the event was not reasonably controllable or preventable, and the event was either natural or caused by human activity but is unlikely to recur at the same location. One major cause for exceedance events in California is wildfires. Wildfires are large acute sources of primary PM2.5 and precursors to both ozone and PM2.5. It is important to identify which exceedances are caused by wildfires because then SCAQMD can focus on controllable sources for PM2.5. 
 
@@ -63,7 +40,7 @@ The fourth and final column categorizes each case: 1 if wildfire smoke caused th
 2.2 Assessment of distinctive level
 The exceptional events demonstrations for ozone uses a tiered analysis to identify whether an exceedance reaches a “distinctive level” depending in part on the percentile value for each exceedance. Much of this requires manual assessment of each exceedance, with 5 years of data, and use of domain knowledge such as historic seasonal patterns of ozone formation (US EPA, 2016). The pyrowex tool instead accounts for seasonality fluctuation in an automated fashion by calculating a 90-day rolling average.  Outliers or distinctive levels are identified when they exceed a threshold above the rolling average.  After consultation with the SCAQMD, this threshold was chosen to be 2.06 standard deviations above the rolling average, with the standard deviation calculated over the range of all available data rather than only 5 years.  The 98th percentile of a normal distribution is reached by this threshold: though PM2.5 concentration distributions tend to have a long tail, the normal assumption was used in this analysis, though this design choice could be refined in subsequent versions of the tool. Figure 1 shows several years of distinctive exceedances at one site, for visualization of how the distinctive levels are identified.
 
-[AnaheimOutlierThreshStd.pdf](https://github.com/obin1/pyrowex/files/11325995/AnaheimOutlierThreshStd.pdf)
+![AnaheimOutlierThreshStd](https://user-images.githubusercontent.com/54367380/234380304-3932501f-f08b-4e3e-ad26-65ce26862ebd.jpg)
 Figure 1. Automated identification of distinctive levels of PM2.5 in pyrowex, accounting for seasonality. 
 
 2.2 Back Trajectory analysis
@@ -74,7 +51,7 @@ NOAA's Hybrid Single-Particle Lagrangian Integrated Trajectory model, or HYSPLIT
 
 The Wildland Fire Emissions Inventory System (WFEIS) provides access to historical wildland fire emissions from across the US (French et al., 2014). The calculator tool allowed for the specification of location, date and emissions source. The source chosen was the NIFS/Geomac parameters provided by the National Wildfire Coordinating Group. This source had data from every year needed for the analysis. The data range chosen was from January 2007 through December 2020. The polygonal area of interest shown in Figure 2 was chosen to contain the domain of all 40 hour back trajectories, with the western boundary neglected, as the focus is on wildfires. The spatial aggregation chosen was the “burned area” because this provided essential location information. The data provided includes the PM2.5 emissions in Mg, the total area burned in km^2, and the location for where the wildfire occurred, allowing for the calculation of Q/D and comparison to trajectories. If the Q/D is higher than 1 there is a high probability that the fire is not a prescribed fire event but an uncontrollable fire (US EPA, 2016).  
 
-
+<img width="283" alt="WFEIS-Polygon" src="https://user-images.githubusercontent.com/54367380/234380711-ff693245-0889-4acd-9388-7b745916d2ca.png">
 Figure 2. A manually drawn WFEIS Polygon incorporating the southern, eastern, and northern boundaries such that it contains the domain of all trajectories from the back trajectory analysis. 
 
 3 Results
